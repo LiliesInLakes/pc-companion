@@ -191,7 +191,7 @@ script = ExtResource("1_p20re")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=707388316]
 scale = Vector2(3.48, 3)
 sprite_frames = SubResource("SpriteFrames_m2sqd")
-animation = &"fly"
+animation = &"idle"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1906567509]
 

@@ -30,13 +30,11 @@ func _ready():
 	area.input_event.connect(_on_area_input)
 
 func maybe_idle():
-	if randf() < 0.3:
+	if(randf() <0.3):
 		is_idling = true
-		idle_timer = randf_range(1.0, 3.0)
-		var r = randi()%3
-		if r == 0 and animated_sprite.sprite_frames.has_animation("idle"):
-			animated_sprite.play("idle")
-			speed = 0
+		idle_timer = 2
+		animated_sprite.play("idle")
+		speed = 0
 func _physics_process(delta: float) -> void:
 	if is_dragging:
 		var mouse_pos = Vector2(DisplayServer.mouse_get_position())
@@ -53,18 +51,12 @@ func _physics_process(delta: float) -> void:
 	var window_pos = Vector2(DisplayServer.window_get_position())
 	if window_pos.x <= 0 or window_pos.x >= screen_size.x - window_size.x:
 		direction.x = 1 if window_pos.x <= 0 else -1
-		if(randf() <0.5):
-			direction.y *= -1
-		else:
-			direction.y = 0
+		direction.y = [-1, 0, 1].pick_random()
 		maybe_idle()
 	if window_pos.y <= 0 or window_pos.y >= screen_size.y - window_size.y:
 		direction.y = 1 if window_pos.y <= 0 else -1
 		maybe_idle()
-		if(randf() <0.5):
-			direction.x *= -1
-		else:
-			direction.x = 0
+		direction.x = [-1, 0, 1].pick_random()
 	if direction.x != 0:
 		animated_sprite.flip_h = direction.x < 0
 	window_pos += direction *speed *delta
