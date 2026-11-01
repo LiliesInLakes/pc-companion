@@ -31,6 +31,26 @@ region = Rect2(240, 0, 48, 48)
 atlas = ExtResource("1_rnpve")
 region = Rect2(288, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1b2e6"]
+atlas = ExtResource("1_rnpve")
+region = Rect2(0, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7qbo"]
+atlas = ExtResource("1_rnpve")
+region = Rect2(48, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2ved"]
+atlas = ExtResource("1_rnpve")
+region = Rect2(96, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhfj7"]
+atlas = ExtResource("1_rnpve")
+region = Rect2(144, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m63tb"]
+atlas = ExtResource("1_rnpve")
+region = Rect2(192, 240, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_kc8kc"]
 atlas = ExtResource("1_rnpve")
 region = Rect2(0, 144, 48, 48)
@@ -105,6 +125,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1b2e6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7qbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2ved")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhfj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m63tb")
+}],
+"loop": 1,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_kc8kc")
 }, {
 "duration": 1.0,
@@ -151,8 +191,7 @@ script = ExtResource("1_p20re")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=707388316]
 scale = Vector2(3.48, 3)
 sprite_frames = SubResource("SpriteFrames_m2sqd")
-animation = &"idle"
-frame_progress = 0.43175453
+animation = &"fly"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1906567509]
 
