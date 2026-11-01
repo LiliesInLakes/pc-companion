@@ -52,20 +52,21 @@ func _physics_process(delta: float) -> void:
 		return 
 	var window_pos = Vector2(DisplayServer.window_get_position())
 	if window_pos.x <= 0 or window_pos.x >= screen_size.x - window_size.x:
-		direction.x *= -1
-		animated_sprite.flip_h = !animated_sprite.flip_h
+		direction.x = 1 if window_pos.x <= 0 else -1
 		if(randf() <0.5):
 			direction.y *= -1
 		else:
 			direction.y = 0
 		maybe_idle()
 	if window_pos.y <= 0 or window_pos.y >= screen_size.y - window_size.y:
-		direction.y *= -1
+		direction.y = 1 if window_pos.y <= 0 else -1
 		maybe_idle()
 		if(randf() <0.5):
 			direction.x *= -1
 		else:
 			direction.x = 0
+	if direction.x != 0:
+		animated_sprite.flip_h = direction.x < 0
 	window_pos += direction *speed *delta
 	window_pos.x = clamp(window_pos.x, 0, screen_size.x - window_size.x)
 	window_pos.y = clamp(window_pos.y, 0, screen_size.y - window_size.y)
