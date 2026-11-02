@@ -63,7 +63,10 @@ func _physics_process(delta: float) -> void:
 		direction.y = [-1, 0, 1].pick_random()
 		maybe_idle()
 	if window_pos.y <= 0 or window_pos.y >= screen_size.y - window_size.y:
-		direction.y = 1 if window_pos.y <= 0 else -1
+		if window_pos.y <= 0:
+			direction.y = -1 
+		else:
+			direction.y = 1
 		if(is_walking):
 			animated_sprite.play("fly")
 		maybe_idle()
