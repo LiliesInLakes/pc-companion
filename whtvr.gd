@@ -8,7 +8,7 @@ var idle_timer = 0.0
 var is_idling = false
 var is_dragging = false
 var drag_offset = Vector2()
-
+var is_walking = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var area = $Area2D
@@ -30,11 +30,18 @@ func _ready():
 	area.input_event.connect(_on_area_input)
 
 func maybe_idle():
+	
 	if(randf() <0.3):
 		is_idling = true
 		idle_timer = 2
 		animated_sprite.play("idle")
 		speed = 0
+	elif(randf() < 0.6):
+		is_walking = true
+		animated_sprite.play("default")
+		speed = 300
+		direction.y = 0
+		
 func _physics_process(delta: float) -> void:
 	if is_dragging:
 		var mouse_pos = Vector2(DisplayServer.mouse_get_position())
@@ -50,11 +57,15 @@ func _physics_process(delta: float) -> void:
 		return 
 	var window_pos = Vector2(DisplayServer.window_get_position())
 	if window_pos.x <= 0 or window_pos.x >= screen_size.x - window_size.x:
+		if(is_walking):
+			animated_sprite.play("fly")
 		direction.x = 1 if window_pos.x <= 0 else -1
 		direction.y = [-1, 0, 1].pick_random()
 		maybe_idle()
 	if window_pos.y <= 0 or window_pos.y >= screen_size.y - window_size.y:
 		direction.y = 1 if window_pos.y <= 0 else -1
+		if(is_walking):
+			animated_sprite.play("fly")
 		maybe_idle()
 		direction.x = [-1, 0, 1].pick_random()
 	if direction.x != 0:
